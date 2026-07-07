@@ -1,0 +1,23 @@
+# Dependencies
+frontend/node_modules/
+backend/node_modules/
+
+# Next.js
+frontend/.next/
+frontend/out/
+
+# Environment
+frontend/.env
+frontend/.env.local
+backend/.env
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+.idea/
