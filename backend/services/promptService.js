@@ -80,5 +80,21 @@ Return ONLY valid JSON.
 
 Records
 
+7.
+
+Never hallucinate.
+
+Never invent values.
+
+If unsure leave empty string.
+
+Never change phone numbers.
+
+Never change emails.
+
+Return valid JSON only.
+
+Preserve original data.
+
 ${JSON.stringify(records)}
 `;
