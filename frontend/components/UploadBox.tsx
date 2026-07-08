@@ -31,7 +31,7 @@ export default function UploadBox({ onFileSelect }: UploadBoxProps) {
    
     <div
   {...getRootProps()}
-  className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-300 shadow-sm
+  className={`border-2 border-dashed rounded-2xl p-12 text-center text-black cursor-pointer transition-all duration-300 shadow-sm
     ${
       isDragActive
         ? "border-blue-600 bg-blue-50 scale-[1.02]"
@@ -42,7 +42,7 @@ export default function UploadBox({ onFileSelect }: UploadBoxProps) {
 
   <UploadCloud className="mx-auto h-16 w-16 text-blue-600 mb-4" />
 
-  <h2 className="text-3xl font-bold text-gray-800 mb-2">
+  <h2 className="text-3xl font-bold text-gray-900 mb-2">
     Upload Your CSV File
   </h2>
 
