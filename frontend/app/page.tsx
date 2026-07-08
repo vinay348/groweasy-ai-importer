@@ -6,10 +6,40 @@ import UploadBox from "@/components/UploadBox";
 import Papa from "papaparse";
 // @ts-ignore
 import PreviewTable from "@/components/PreviewTable";
+import api from "@/services/api";
+import ResultTable from "@/components/ResultTable";
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewData, setPreviewData] = useState<Record<string, string>[]>([]);
+  const [parsedData, setParsedData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
+
+  const handleImport = async () => {
+    if (!selectedFile) return;
+
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+
+      formData.append("file", selectedFile);
+
+      const response = await api.post(
+        "/import",
+        formData
+      );
+
+      setParsedData(response.data.data);
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   const handleFileSelect = (file: File) => {
     setSelectedFile(file);
@@ -63,13 +93,14 @@ export default function Home() {
         <PreviewTable data={previewData} />
         {previewData.length > 0 && (
           <div className="mt-8 flex justify-center">
-            <button
+            <button onClick={handleImport}
               className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl text-lg font-semibold transition"
             >
-              Confirm Import
+              {loading ? "Importing..." : "Confirm Import"}
             </button>
           </div>
         )}
+        <ResultTable data={parsedData} />
       </div>
     </main>
   );
