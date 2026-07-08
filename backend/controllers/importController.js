@@ -1,4 +1,5 @@
 import { parseCSV } from "../services/csvService.js";
+import fs from "fs";
 
 export const importCSV = async (req, res) => {
   try {
@@ -10,6 +11,7 @@ export const importCSV = async (req, res) => {
     }
 
     const records = await parseCSV(req.file.path);
+    fs.unlinkSync(req.file.path);
 
     res.status(200).json({
       success: true,
