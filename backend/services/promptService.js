@@ -115,5 +115,22 @@ Return only the JSON array.
 
 Records:
 
+12.
+If a phone number begins with + followed by digits (for example +91, +1, +44):
+
+Extract the prefix into country_code.
+
+Remove the prefix from mobile_without_country_code.
+
+Examples
+
++91 9876543210
+
+country_code="+91"
+
+mobile_without_country_code="9876543210"
+
+Do NOT leave country_code empty when a prefix exists.
+
 ${JSON.stringify(records)}
 `;
