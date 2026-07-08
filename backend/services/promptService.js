@@ -6,108 +6,114 @@ Convert the following CSV records into this exact JSON schema.
 Schema:
 
 [
-{
-created_at:"",
-name:"",
-email:"",
-country_code:"",
-mobile_without_country_code:"",
-company:"",
-city:"",
-state:"",
-country:"",
-lead_owner:"",
-crm_status:"",
-crm_note:"",
-data_source:"",
-possession_time:"",
-description:""
-}
+  {
+    "created_at": "",
+    "name": "",
+    "email": "",
+    "country_code": "",
+    "mobile_without_country_code": "",
+    "company": "",
+    "city": "",
+    "state": "",
+    "country": "",
+    "lead_owner": "",
+    "crm_status": "",
+    "crm_note": "",
+    "data_source": "",
+    "possession_time": "",
+    "description": ""
+  }
 ]
 
 Rules
 
-1.
-Use ONLY these statuses
+1. Use ONLY these CRM status values:
 
-GOOD_LEAD_FOLLOW_UP
+- GOOD_LEAD_FOLLOW_UP
+- DID_NOT_CONNECT
+- BAD_LEAD
+- SALE_DONE
 
-DID_NOT_CONNECT
+Determine crm_status from remarks, comments, notes, follow-up text, or similar fields.
 
-BAD_LEAD
+2. Use ONLY these data_source values:
 
-SALE_DONE
+- leads_on_demand
+- meridian_tower
+- eden_park
+- varah_swamy
+- sarjapur_plots
 
-2.
+If none match confidently, return an empty string.
 
-Use ONLY these data sources
+3. Email Rules
 
-leads_on_demand
+- Use the first email as email.
+- If additional emails exist, append them to crm_note.
 
-meridian_tower
+4. Phone Rules
 
-eden_park
+- If a phone contains a country code (for example +91, +1, +44), extract it into country_code.
+- Store only the remaining digits in mobile_without_country_code.
+- If multiple phone numbers exist, use the first one and append the remaining numbers to crm_note.
+- Never modify phone numbers.
 
-varah_swamy
+5. CRM Notes
 
-sarjapur_plots
+Store the ORIGINAL remarks/comments/follow-up text inside crm_note.
 
-Otherwise keep blank.
+Examples:
+Interested
+Call next week
+Requested demo
+No response
+Busy
+Requested pricing
 
-3.
+Do NOT lose the original remark.
 
-If multiple emails exist
+6. Description
 
-Use first
+If there is an "Extra Info", "Description", "Additional Details", or similar column containing useful information that does not fit another field, store it in description.
 
-Append remaining into crm_note.
+Otherwise return an empty string.
 
-4.
+7. created_at
 
-If multiple phones exist
+If a date exists, preserve it in a JavaScript-compatible date format.
 
-Use first
+If no date exists, return an empty string.
 
-Append remaining into crm_note.
+8. Skip any record that has neither an email nor a phone number.
 
-5.
+9. Never hallucinate.
 
-Skip records without email AND phone.
+- Never invent values.
+- Never invent companies.
+- Never invent cities.
+- Never invent countries.
+- Never invent dates.
+- Never invent lead owners.
+- If a value is missing, return an empty string.
 
-6.
+10. Preserve all original data.
 
-Return ONLY valid JSON.
+- Never modify email addresses.
+- Never modify phone numbers.
+- Preserve original remarks in crm_note.
+- Preserve additional information in description.
 
-Records
+11. Return ONLY valid JSON.
 
-7.
+No markdown.
 
-Never hallucinate.
+No explanation.
 
-Never invent values.
+No code block.
 
-If unsure leave empty string.
+Return only the JSON array.
 
-Never change phone numbers.
-
-Never change emails.
-
-Return valid JSON only.
-
-Preserve original data.
-
-8.
-
-Never invent data.
-
-If a value is missing,
-return an empty string.
-
-Never modify email addresses.
-
-Never modify phone numbers.
-
-Return only JSON.
+Records:
 
 ${JSON.stringify(records)}
 `;
