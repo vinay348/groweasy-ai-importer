@@ -1,0 +1,11 @@
+id,first_name,last_name,email,age,city,signup_date,is_active
+1,John,Smith,john.smith@example.com,28,New York,2024-01-15,true
+2,Emma,Johnson,emma.johnson@example.com,34,Los Angeles,2024-02-03,true
+3,Michael,Williams,michael.williams@example.com,45,Chicago,2024-01-22,false
+4,Sophia,Brown,sophia.brown@example.com,29,Houston,2024-03-10,true
+5,James,Davis,james.davis@example.com,52,Phoenix,2024-02-18,true
+6,Olivia,Miller,olivia.miller@example.com,23,Philadelphia,2024-04-05,false
+7,William,Wilson,william.wilson@example.com,38,San Antonio,2024-01-30,true
+8,Ava,Moore,ava.moore@example.com,41,San Diego,2024-03-25,true
+9,Alexander,Taylor,alexander.taylor@example.com,26,Dallas,2024-02-14,true
+10,Isabella,Anderson,isabella.anderson@example.com,33,San Jose,2024-04-19,false
