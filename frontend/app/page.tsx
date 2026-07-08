@@ -15,6 +15,13 @@ export default function Home() {
   const [parsedData, setParsedData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const [summary, setSummary] = useState({
+    totalRecords: 0,
+    processedRecords: 0,
+    imported: 0,
+    skipped: 0,
+  });
+
 
   const handleImport = async () => {
     if (!selectedFile) return;
@@ -31,7 +38,14 @@ export default function Home() {
         formData
       );
 
-      setParsedData(response.data.data);
+      setParsedData(response.data.records);
+
+      setSummary({
+        totalRecords: response.data.totalRecords,
+        processedRecords: response.data.processedRecords,
+        imported: response.data.imported,
+        skipped: response.data.skipped,
+      });
 
     } catch (err) {
       console.error(err);
@@ -100,7 +114,49 @@ export default function Home() {
             </button>
           </div>
         )}
+
+
+
+{parsedData.length > 0 && (
+  <>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+
+      <div className="bg-blue-100 p-5 rounded-xl shadow">
+        <h3 className="font-semibold">📄 Total Records</h3>
+        <p className="text-3xl font-bold">
+          {summary.totalRecords}
+        </p>
+      </div>
+
+      <div className="bg-yellow-100 p-5 rounded-xl shadow">
+        <h3 className="font-semibold">⚙️ Processed</h3>
+        <p className="text-3xl font-bold">
+          {summary.processedRecords}
+        </p>
+      </div>
+
+      <div className="bg-green-100 p-5 rounded-xl shadow">
+        <h3 className="font-semibold">✅ Imported</h3>
+        <p className="text-3xl font-bold">
+          {summary.imported}
+        </p>
+      </div>
+
+      <div className="bg-red-100 p-5 rounded-xl shadow">
+        <h3 className="font-semibold">❌ Skipped</h3>
+        <p className="text-3xl font-bold">
+          {summary.skipped}
+        </p>
+      </div>
+
+    </div>
+
+
+
+
         <ResultTable data={parsedData} />
+        </>
+        )}
       </div>
     </main>
   );

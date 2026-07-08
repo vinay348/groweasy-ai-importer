@@ -96,5 +96,18 @@ Return valid JSON only.
 
 Preserve original data.
 
+8.
+
+Never invent data.
+
+If a value is missing,
+return an empty string.
+
+Never modify email addresses.
+
+Never modify phone numbers.
+
+Return only JSON.
+
 ${JSON.stringify(records)}
 `;

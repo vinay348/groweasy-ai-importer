@@ -1,9 +1,9 @@
 type Props = {
-  data: any[];
+  data?: any[];
 };
 
 export default function ResultTable({ data }: Props) {
-  if (data.length === 0) return null;
+  if (!data || data.length === 0) return null;
 
   const headers = Object.keys(data[0]);
 
