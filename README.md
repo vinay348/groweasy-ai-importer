@@ -180,7 +180,7 @@ file
 Example using Postman
 
 * Method: POST
-* URL: http://localhost:5000/upload
+* URL: http://localhost:5000/import
 * Body → form-data
 * Key = file
 * Type = File
@@ -348,33 +348,6 @@ The application handles
 * Database integration
 * Authentication
 * Export processed CRM records
-
----
-
-## Screenshots
-
-Add screenshots of:
-
-* Upload Page
-* CSV Preview
-* Parsed CRM Result
-* Import Summary
-
----
-
-## Deployment
-
-Frontend
-
-```
-<YOUR_FRONTEND_URL>
-```
-
-Backend
-
-```
-<YOUR_BACKEND_URL>
-```
 
 ---
 
